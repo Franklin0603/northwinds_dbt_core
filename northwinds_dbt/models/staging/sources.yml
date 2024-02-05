@@ -1,0 +1,7 @@
+version: 2
+sources:
+  - name: rds
+    database: northwinds
+    schema: public
+    tables:
+      - name: customers
