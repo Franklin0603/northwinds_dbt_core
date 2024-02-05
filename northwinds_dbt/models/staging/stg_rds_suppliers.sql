@@ -59,4 +59,4 @@ SELECT
     region, 
     fax, 
     homepage
-FROM final;
+FROM final
