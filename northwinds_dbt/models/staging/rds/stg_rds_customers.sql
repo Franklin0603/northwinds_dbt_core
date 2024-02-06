@@ -1,7 +1,10 @@
--- This dbt query transforms customer data from the 'rds' source by prepending 'rds-' to the customer_id, 
--- indicating its source origin. It also splits the contact_name into first_name and last_name, assigning 'Unknown' 
--- for any missing last names, and retains the country information. These transformations enhance the clarity of 
--- customer identification and facilitate more effective data segmentation for downstream analysis.
+
+/*
+    This dbt query transforms customer data from the 'rds' source by prepending 'rds-' to the customer_id, 
+    indicating its source origin. It also splits the contact_name into first_name and last_name, assigning 'Unknown' 
+    for any missing last names, and retains the country information. These transformations enhance the clarity of 
+    customer identification and facilitate more effective data segmentation for downstream analysis.
+*/
 
 
 WITH source_customers AS (
