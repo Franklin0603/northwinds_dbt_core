@@ -1,27 +1,26 @@
-{# This dbt query transforms customer data from the 'rds' source by prepending 'rds-' to the customer_id, indicating its source origin. It also splits the contact_name into first_name and last_name, assigning 'Unknown' for any missing last names, and retains the country information. These transformations enhance the clarity of customer identification and facilitate more effective data segmentation for downstream analysis. #}
+1	hubspot_contact_id	text
+2	rds_contact_id	text
+3	first_name	text
+4	last_name	text
+5	phone	text
+6	hubspot_company_id	text
+7	rds_company_id	text
 
-WITH source AS (
-    SELECT 
-        customer_id,
-        country, 
-        contact_name 
-    FROM {{ source('rds', 'customers') }}
-),
--- Rename and format specific columns for clarity, including customer ID and contact names
-renamed AS (
-    SELECT
-        CONCAT('rds-', customer_id) AS customer_id_modified, 
-        country,
-        -- Splitting contact_name into first and last names, with handling for missing last names
-        SPLIT_PART(contact_name, ' ', 1) AS first_name,
-        COALESCE(NULLIF(SPLIT_PART(contact_name, ' ', 2), ''), 'Unknown') AS last_name
-    FROM source 
-)
+hubspot-243	rds-FISSA	Diego	Roel	NULL	hubspot-fissa-fabrica-inter--salchichas-s-a-	rds-fissa-fabrica-inter.-salchichas-s.a.
 
--- Final selection from the transformed data, ensuring column names match descriptions
-SELECT 
-    customer_id_modified AS customer_id,
-    country, 
-    first_name, 
-    last_name
-FROM renamed
+hubspot-241	rds-BSBEV	Victoria	Ashworth	(171) 555-1212	"hubspot-b's-beverages"	"rds-b's-beverages"
+
+hubspot-159	rds-BONAP	Laurence	Lebihan	NULL	"hubspot-bon-app'"	"rds-bon-app'"
+
+hubspot-243	rds-FISSA	Diego	Roel	NULL	hubspot-fissa-fabrica-inter--salchichas-s-a-	rds-fissa-fabrica-inter.-salchichas-s.a.
+
+hubspot-237	rds-FRANS	Paolo	Accorti	(011) 498-8260	hubspot-franchi-s-p-a-	rds-franchi-s.p.a.
+
+hubspot-202	rds-LAMAI	Annette	Roulet	NULL	"hubspot-la-maison-d'asie"	"rds-la-maison-d'asie"
+
+hubspot-119	rds-LETSS	Jaime	Yorres	(415) 555-5938	"hubspot-let's-stop-n-shop"	"rds-let's-stop-n-shop"
+
+
+hubspot-281	NULL	Zenia	Houlworth	(803) 200-0967	hubspot-rau--nader-and-yundt	NULL
+
+hubspot-41	NULL	Tarah	Charleston	(344) 870-4161	hubspot-collier--schimmel-and-bahringer	NULL
