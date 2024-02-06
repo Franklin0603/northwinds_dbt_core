@@ -19,7 +19,7 @@ stg_companies as (
         name,
         company_id 
     FROM 
-        ref('stg_rds_companies')
+        {{ ref('stg_rds_companies') }}
 ),
 
 -- Rename and format specific columns for clarity, including customer ID and contact names
