@@ -14,7 +14,7 @@ create_company_id AS (
 final AS (
     SELECT 
         create_company_id AS company_id,
-        business_name
+        business_name AS name
     FROM create_company_id
 )
 

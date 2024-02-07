@@ -1,7 +1,7 @@
 WITH hubspot_companies AS (
     SELECT 
         company_id,
-        business_name
+        name
     FROM 
         {{ ref('stg_hubspot_companies') }}
 ), 
@@ -20,7 +20,7 @@ merged_companies as (
     SELECT 
         company_id as hubspot_company_id, 
         null as rds_company_id, 
-        business_name as name 
+        name
     FROM 
         hubspot_companies 
     

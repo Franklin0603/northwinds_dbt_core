@@ -1,7 +1,13 @@
 version: 2
+
 sources:
   - name: rds
     database: northwinds
     schema: public
     tables:
       - name: customers
+        columns:
+          - name: customer_id
+            tests:
+              - dbt_expectations.unique
+              - dbt_expectations.not_null

@@ -12,7 +12,7 @@ WITH source_contracts AS (
 stg_hubspot_companies AS (
     SELECT 
         company_id,
-        business_name 
+        name 
     FROM 
         {{ ref('stg_hubspot_companies') }}
 ),
@@ -26,7 +26,7 @@ add_company_id_to_contracts AS (
         stg_hubspot_companies.company_id
     FROM source_contracts
     JOIN stg_hubspot_companies
-        ON source_contracts.business_name = stg_hubspot_companies.business_name
+        ON source_contracts.business_name = stg_hubspot_companies.name
 ),
 
 cleanup_columns AS (
