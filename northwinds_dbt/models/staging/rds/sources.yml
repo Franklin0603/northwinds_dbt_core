@@ -9,5 +9,15 @@ sources:
         columns:
           - name: customer_id
             tests:
-              - dbt_expectations.unique
-              - dbt_expectations.not_null
+              - unique
+              - not_null
+      - name: orders
+        columns:
+          - name: order_id
+            tests:
+              - not_null
+      - name: order_details
+        columns:
+          - name: order_id
+            tests:
+              - not_null

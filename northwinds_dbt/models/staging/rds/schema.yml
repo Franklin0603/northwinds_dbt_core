@@ -5,20 +5,20 @@ models:
     columns:
       - name: company_id
         tests:
-          - dbt_expectations.unique
-          - dbt_expectations.not_null
+          - unique
+          - not_null
       - name: country
         tests:
-          - dbt_expectations.not_null
+          - not_null
 
   - name: stg_rds_customers
     columns:
       - name: customer_id
         tests:
-          - dbt_expectations.unique
-          - dbt_expectations.not_null
+          - unique
+          - not_null
       - name: updated_phone
         tests:
-          - dbt_expectations.string_length:
-              min_length: 10
-              max_length: 10
+          - string_length:
+              min_length: 12
+              max_length: 12
