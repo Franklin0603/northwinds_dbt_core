@@ -1,0 +1,22 @@
+version: 2
+
+models:
+  - name: mart_orders_fact
+    description: "mart order data from various int_orders and int_contacts, standardized for reporting and analysis."
+    config:
+      materialized: table
+      tags: ["mart"]  
+    columns:
+      - name: order_pk
+        description: "The primary key for the order, unique across all orders."
+        tests:
+          - unique
+          - not_null
+        
+      - name: contact_pk
+        description: "The foreign key for the contacts table, unique across all orders."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('int_contacts')
+              field: contact_pk

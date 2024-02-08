@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: int_orders
+    description: "Integrated order data from various sources, standardized for reporting and analysis."
+    config:
+      materialized: view  # Choose 'table', 'view', or another materialization strategy as needed
+      tags: ["int"]  
+    columns:
+      - name: order_pk
+        description: "The primary key for the order, unique across all orders."
+        tests:
+          - unique
+          - not_null
+        
+      - name: discount
+        description: "The discount applied to the order, if any. Stored as a percentage between 0 and 1."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0 AND discount <= 1"
+
+      - name: unit_price
+        description: "The price per unit of the product, before discounts. Must be greater than 0."
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true: 
+              expression: "> 0"

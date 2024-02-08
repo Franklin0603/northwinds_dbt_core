@@ -10,9 +10,9 @@ WITH stg_rds_orders AS (
         unit_price 
     FROM {{ ref('stg_rds_orders')}}
 ), 
-generate_order_id AS (
+generate_order_pk AS (
     SELECT
-        {{ dbt_utils.generate_surrogate_key(['order_id', 'product_id', 'customer_id']) }} as contact_pk, 
+        {{ dbt_utils.generate_surrogate_key(['order_id', 'product_id', 'customer_id']) }} as order_pk, 
         employee_id,
         customer_id,
         order_date,
@@ -22,4 +22,5 @@ generate_order_id AS (
         unit_price 
     FROM stg_rds_orders
 )
-SELECT * FROM generate_order_id
+SELECT * FROM generate_order_pk
+
